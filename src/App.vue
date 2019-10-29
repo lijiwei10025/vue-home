@@ -21,7 +21,7 @@
       <van-tabbar route class="app-footer-van-tabbar">
         <van-tabbar-item replace to="/home" icon="wap-home-o">首页</van-tabbar-item>
         <van-tabbar-item replace to="/member" icon="user-circle-o" dot>会员</van-tabbar-item>
-        <van-tabbar-item replace to="/shopcar" icon="shopping-cart-o" info="0">购物车</van-tabbar-item>
+        <van-tabbar-item replace to="/shopcar" icon="shopping-cart-o" :info="$store.getters.getAllCount" id="badge">购物车</van-tabbar-item>
         <van-tabbar-item replace to="/search" icon="search">搜索</van-tabbar-item>
       </van-tabbar>
     </div>
@@ -31,7 +31,8 @@
 <script>
 export default {
   data(){
-    return {}
+    return {
+    }
   },
   methods: {
     onClickLeft() {
