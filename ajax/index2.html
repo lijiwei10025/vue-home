@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <input type="button" onclick="submitForm ()">
+    <script>
+        function add(i, callback) {
+            let p = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(i + 1)
+                    reject(new Error(''))
+                }, 1000)
+            })
+            return p
+        }
+
+        function submitForm() {
+            let promise = add(0)
+
+            promise.then(
+                function(data) {
+                    console.log(data)
+                    return data + 1
+                }
+            ).then(
+                function(data) {
+                    console.log(data)
+                    return data + 1
+                }
+            ).catch(
+                function(e) {
+                    console.log(e)
+                }
+            )
+        }
+    </script>
+</body>
+
+</html>

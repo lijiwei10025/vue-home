@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    function ajax(options) {
+        let p = new Promise(function(resolve, reject) {
+            let xhr = new XMLHttpRequest()
+            xhr.responseType = 'json'
+            xhr.open('post', options.url)
+
+            xhr.onload = function() {
+                console.log(typeof xhr.response, xhr.response)
+                let data = JSON.parse(xhr.response)
+                if (data.code !== 1) {
+                    reject(new Error(data.msg))
+                }
+                resolve(data)
+                    //options.success(JSON.parse(xhr.response))
+            }
+
+            xhr.ontimeout = function() {
+                reject(new Error('ontimeout'))
+            }
+
+            xhr.onerror = function() {
+                reject(new Error('onerror'))
+            }
+
+            xhr.send(options.params)
+        })
+        return p
+    }
+
+    function init() {
+        ajax({
+            url: 'data/index'
+        }).then(function(data) {
+            console.log(data)
+        }).catch(function(e) {
+            console.error(e)
+        })
+    }
+</script>
+
+</html>
